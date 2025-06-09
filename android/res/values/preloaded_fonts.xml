@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="preloaded_fonts" translatable="false">
+        <item>@font/alumni_sans_inline_one</item>
+        <item>@font/flow_block</item>
+        <item>@font/michroma</item>
+        <item>@font/secular_one</item>
+        <item>@font/silkscreen_bold</item>
+        <item>@font/sixtyfour</item>
+    </array>
+</resources>

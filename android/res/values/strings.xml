@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">ThoseTravelingAlong</string>
+    <!-- Strings relacionados con el login de usuarios -->
+    <string name="prompt_inicio_sesion">Iniciar Sesión</string>
+    <string name="prompt_cancelar">Cancelar</string>
+    <string name="prompt_crear_cuenta">Crear cuenta</string>
+    <string name="prompt_correo">Correo electrónico</string>
+    <string name="prompt_contrasena">Contraseña</string>
+    <string name="prompt_contrasenaConfirm">Confirmar contraseña</string>
+    <string name="prompt_nmUsuario">Nombre de Usuario</string>
+    <string name="prompt_fechaNacimiento">Fecha de Nacimiento</string>
+    <!-- Strings Utilizados en la UI -->
+    <string name="prompt_toca_para_comenzar">Toca para comenzar la aventura!</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+</resources>

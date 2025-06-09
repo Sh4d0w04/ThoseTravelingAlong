@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/blankFragment"
+        android:icon="@drawable/icono_social"
+        android:checked="false"
+        android:title="Social"
+        />
+
+    <item
+        android:id="@+id/androidLauncher"
+        android:icon="@drawable/icono_home"
+        android:checked="false"
+        android:title="Home"
+        />
+
+    <item
+        android:id="@+id/mainActivity3"
+        android:icon="@drawable/icono_pasos"
+        android:checked="false"
+        android:title="Pasos"
+        />
+</menu>

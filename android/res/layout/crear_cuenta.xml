@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:cardBackgroundColor="#DAA75D"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="10dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="15dp">
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="300dp"
+            android:layout_height="60dp"
+
+            android:fontFamily="@font/silkscreen_bold"
+            android:gravity="center"
+            android:text="@string/prompt_crear_cuenta"
+            android:textSize="24sp"
+            android:textColor="@android:color/white"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/edTxtNombreUsuario"
+            android:layout_width="300dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintEnd_toEndOf="@+id/textView2"
+            app:layout_constraintHorizontal_bias="0.495"
+            app:layout_constraintStart_toStartOf="@+id/textView2"
+            app:layout_constraintTop_toBottomOf="@+id/textView2">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="@string/prompt_nmUsuario">
+
+            </com.google.android.material.textfield.TextInputEditText>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/edTxtContrasena"
+            android:layout_width="300dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintEnd_toEndOf="@+id/edTxtNombreUsuario"
+            app:layout_constraintStart_toStartOf="@+id/edTxtNombreUsuario"
+            app:layout_constraintTop_toBottomOf="@+id/edTxtNombreUsuario"
+            app:passwordToggleEnabled="true">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="textPassword"
+                android:hint="@string/prompt_contrasena">
+
+            </com.google.android.material.textfield.TextInputEditText>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/edTxtConfirmarContrasena"
+            android:layout_width="300dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="10dp"
+            app:passwordToggleEnabled="true"
+            app:layout_constraintEnd_toEndOf="@+id/edTxtContrasena"
+            app:layout_constraintStart_toStartOf="@+id/edTxtContrasena"
+            app:layout_constraintTop_toBottomOf="@+id/edTxtContrasena">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="textPassword"
+                android:hint="@string/prompt_contrasenaConfirm">
+
+            </com.google.android.material.textfield.TextInputEditText>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/edTxtCorreo"
+            android:layout_width="300dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintEnd_toEndOf="@+id/edTxtConfirmarContrasena"
+            app:layout_constraintStart_toStartOf="@+id/edTxtConfirmarContrasena"
+            app:layout_constraintTop_toBottomOf="@+id/edTxtConfirmarContrasena">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="@string/prompt_correo">
+
+            </com.google.android.material.textfield.TextInputEditText>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/edTxtFechaNacimiento"
+            android:layout_width="300dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintEnd_toEndOf="@+id/edTxtCorreo"
+            app:layout_constraintStart_toStartOf="@+id/edTxtCorreo"
+            app:layout_constraintTop_toBottomOf="@+id/edTxtCorreo">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="@string/prompt_fechaNacimiento">
+
+            </com.google.android.material.textfield.TextInputEditText>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/tvIniciarSesion"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/silkscreen"
+
+            android:text="@string/prompt_inicio_sesion"
+            android:textColor="#4F35AD"
+            app:layout_constraintEnd_toEndOf="@+id/edTxtFechaNacimiento"
+            app:layout_constraintStart_toStartOf="@+id/edTxtFechaNacimiento"
+            app:layout_constraintTop_toBottomOf="@+id/edTxtFechaNacimiento" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvIniciarSesion">
+
+            <Button
+                android:id="@+id/btnIniciarSesion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:fontFamily="@font/silkscreen_bold"
+                android:padding="12dp"
+                android:textColor="@android:color/white"
+                android:backgroundTint="#8A5709"
+
+                android:text="@string/prompt_crear_cuenta"
+                android:textSize="14sp" />
+
+
+            <Button
+                android:id="@+id/btnCancelar"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:fontFamily="@font/silkscreen_bold"
+                android:padding="12dp"
+                android:textColor="@android:color/white"
+                android:backgroundTint="#8A5709"
+
+                android:text="@string/prompt_cancelar"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.cardview.widget.CardView>

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "472196829658",
+    "project_id": "those-traveling-along",
+    "storage_bucket": "those-traveling-along.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:472196829658:android:010a5ee924188aa53bb0e3",
+        "android_client_info": {
+          "package_name": "com.example.thoseTravelingAlong"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDLOJuQfRUaf_p7dtfmOf3qKC44eOngTS0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
