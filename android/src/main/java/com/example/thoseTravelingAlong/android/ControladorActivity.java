@@ -24,7 +24,7 @@ import com.google.android.material.navigation.NavigationBarView;
 public class ControladorActivity extends AppCompatActivity implements AndroidFragmentApplication.Callbacks {
     BottomNavigationView bottomNavigationView;
     Fragment fragmentActual;
-    int indiceActual = 0;
+    int indiceActual = 3;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

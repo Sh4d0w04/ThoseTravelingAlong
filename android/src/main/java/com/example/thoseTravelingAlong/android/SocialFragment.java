@@ -86,7 +86,7 @@ public class SocialFragment extends Fragment {
         tvNumMonedas = view.findViewById(R.id.tvMonedasGanadasSF);
         lvListaComp = view.findViewById(R.id.lvComp);
 
-        adaptadorComp = new AdaptadorComp(getContext(),R.layout.listado_competiciones_persona,jugadores);
+        adaptadorComp = new AdaptadorComp(getContext(), R.layout.listado_competiciones_persona, jugadores);
         lvListaComp.setAdapter(adaptadorComp);
         btnIniciarCom = view.findViewById(R.id.btnIniciarNuevComp);
 
@@ -111,47 +111,46 @@ public class SocialFragment extends Fragment {
         Log.e("Prueba Firebase", "si");
     }
 
-    private void leerCompeticionFireBase(){
+    private void leerCompeticionFireBase() {
         listener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 listaCompeticiones = new ArrayList<>();
-                if(snapshot.exists()){
-                    for (DataSnapshot competicionSnapshot : snapshot.getChildren()){
+                if (snapshot.exists()) {
+                    for (DataSnapshot competicionSnapshot : snapshot.getChildren()) {
                         String numComp = competicionSnapshot.getKey();
                         CompeticionFirebase competicionFirebase = competicionSnapshot.getValue(CompeticionFirebase.class);
-                        if(competicionFirebase != null){
+                        if (competicionFirebase != null) {
                             competicionFirebase.setNumComp(numComp);
                             listaCompeticiones.add(competicionFirebase);
                         }
                     }
-                    String correoUser = infoUser.getString("Nom_User","");
-                    for(CompeticionFirebase competicionFirebaseList: listaCompeticiones){
+                    String correoUser = infoUser.getString("Nom_User", "");
+                    for (CompeticionFirebase competicionFirebaseList : listaCompeticiones) {
                         String email1 = competicionFirebaseList.getEmail1();
                         String email2 = competicionFirebaseList.getEmail2();
                         String email3 = competicionFirebaseList.getEmail3();
 
-                        if(correoUser.equals(email1) || correoUser.equals(email2) || correoUser.equals(email3)){
-                            anadirJugador(email1,competicionFirebaseList.getNumComp());
-                            anadirJugador(email2,competicionFirebaseList.getNumComp());
-                            anadirJugador(email3,competicionFirebaseList.getNumComp());
+                        if (correoUser.equals(email1) || correoUser.equals(email2) || correoUser.equals(email3)) {
+                            anadirJugador(email1, competicionFirebaseList.getNumComp());
+                            anadirJugador(email2, competicionFirebaseList.getNumComp());
+                            anadirJugador(email3, competicionFirebaseList.getNumComp());
                         }
                     }
                     adaptadorComp.notifyDataSetChanged();
-                }else{
-                    Log.e("FireBase","no hay tablas");
+                } else {
+                    Log.e("FireBase", "no hay tablas");
                 }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Log.e("FireBase","Error al leer todas las competiciones" + error.getMessage());
+                Log.e("FireBase", "Error al leer todas las competiciones" + error.getMessage());
             }
         };
         databaseReference.addValueEventListener(listener);
 
     }
-
 
 
     private void crearEInstanciarDialogoCrearComp() {
@@ -173,6 +172,7 @@ public class SocialFragment extends Fragment {
                 String correo1 = "";
                 String correo2 = "";
                 String correo3 = infoUser.getString("Nom_User", "");
+                String nomUser = infoUser.getString("nombre_de_usuario","");
                 if (!etCorreo1.getEditText().getText().toString().trim().isEmpty()) {
                     correo1 = etCorreo1.getEditText().getText().toString();
                     if (correo1.equals(correo3)) {
@@ -204,6 +204,7 @@ public class SocialFragment extends Fragment {
                 } else {
                     Toast.makeText(getContext(), "Tiene que introducir el primer correo", Toast.LENGTH_SHORT).show();
                 }
+                enviarMensajeComp(listaCorreos,nomUser);
                 dialogoCrearComp.dismiss();
             }
         });
@@ -230,11 +231,11 @@ public class SocialFragment extends Fragment {
         return fecha;
     }
 
-    private void anadirJugador(String correo, String numComp){
-        if(correo != null){
-            if(!correo.trim().isEmpty()){
-                String correoUser = infoUser.getString("Nom_User","");
-                if(!correo.equals(correoUser)) {
+    private void anadirJugador(String correo, String numComp) {
+        if (correo != null) {
+            if (!correo.trim().isEmpty()) {
+                String correoUser = infoUser.getString("Nom_User", "");
+                if (!correo.equals(correoUser)) {
                     Jugador jugador = new Jugador(correo);
                     jugador.setNumComp(numComp);
                     jugadores.add(jugador);
@@ -243,19 +244,21 @@ public class SocialFragment extends Fragment {
         }
     }
 
-    private void enviarMensajeComp(String correo, String nomUsuario){
+    private void enviarMensajeComp(List<String> correo, String nomUsuario) {
+        String[] listaCorreos = correo.toArray(new String[0]);
         String asunto = "El usuario " + nomUsuario + "te invita a una competición!";
         String mensaje = "Te apetece andar?, quieres divertirte un rato capturando peces?, el usuario "
             + nomUsuario + "quiere ver quien de vosotros puede conseguir más pasos y peces!"
-            +"\nA que esperas!, empieza ya a jugar a ThoseTravelingAlong!!"
-            +"\nSi todavia no tienes instalada la app, puedes descargartela desde le siguiente enlace:"
-            +"\n";
+            + "\nA que esperas!, empieza ya a jugar a ThoseTravelingAlong!!"
+            + "\nSi todavia no tienes instalada la app, puedes descargartela desde le siguiente enlace:"
+            + "\nhttps://github.com/Sh4d0w04/ThoseTravelingAlong.git";
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.putExtra(Intent.EXTRA_EMAIL,
-            new String[]{correo});
-        intent.putExtra(Intent.EXTRA_SUBJECT,asunto);
+            listaCorreos);
+        intent.putExtra(Intent.EXTRA_SUBJECT, asunto);
         intent.putExtra(Intent.EXTRA_TEXT, mensaje);
         intent.setType("message/rfc822");
         startActivity(Intent.createChooser(intent, "Elije un cliente de correo:"));
+
     }
 }

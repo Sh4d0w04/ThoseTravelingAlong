@@ -184,7 +184,7 @@ public class StepFragment extends Fragment implements SensorEventListener {
 
             dinstanceKM = pasosDadosHoy * 0.754f / 1000;
             caloriasQuemadas = pasosDadosHoy * 0.04f;
-            tvStepCounter.setText(Integer.toString(pasosActuales));
+            tvStepCounter.setText(Integer.toString(pasosDadosHoy));
 
             String km = String.valueOf(dinstanceKM);
             String cal = String.valueOf(caloriasQuemadas);

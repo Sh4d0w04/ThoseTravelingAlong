@@ -35,11 +35,8 @@ public class AdaptadorComp extends ArrayAdapter<Jugador> {
         }
 
         Jugador jugadorCom = listComp.get(position);
-
-        ImageView imagen = view.findViewById(R.id.ivIconoJugador);
-        imagen.setImageResource(R.mipmap.icono_tta_round);
         TextView tvNombreUser = view.findViewById(R.id.tvNomUsuario);
-        tvNombreUser.setText(jugadorCom.getNombreUsuario());
+        tvNombreUser.setText(jugadorCom.getCorreoElectronico());
         TextView tvCodigoComp = view.findViewById(R.id.tvCodigoComp);
         tvCodigoComp.setText(jugadorCom.getNumComp());
         return view;
