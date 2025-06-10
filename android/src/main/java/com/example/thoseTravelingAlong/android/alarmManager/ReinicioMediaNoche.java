@@ -23,7 +23,7 @@ public class ReinicioMediaNoche extends BroadcastReceiver{
     @Override
     public void onReceive(Context context, Intent intent) {
         WorkManager workManager = WorkManager.getInstance(context);
-        PeriodicWorkRequest periodicWorkRequest = new PeriodicWorkRequest.Builder(BBDDWorker.class, 15, TimeUnit.MINUTES).build();
+        PeriodicWorkRequest periodicWorkRequest = new PeriodicWorkRequest.Builder(BBDDWorker.class, 24, TimeUnit.HOURS).build();
 
         workManager.enqueueUniquePeriodicWork("BBDD periodico", ExistingPeriodicWorkPolicy.CANCEL_AND_REENQUEUE, periodicWorkRequest);
     }

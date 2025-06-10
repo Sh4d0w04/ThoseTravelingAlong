@@ -62,10 +62,10 @@
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/tvNomUsuario"
-            app:layout_constraintHorizontal_bias="0.029"
+            app:layout_constraintHorizontal_bias="0.007"
             app:layout_constraintStart_toStartOf="@+id/tvNomUsuario"
             app:layout_constraintTop_toBottomOf="@+id/tvNomUsuario"
-            app:layout_constraintVertical_bias="0.25" />
+            app:layout_constraintVertical_bias="0.227" />
 
         <TextView
             android:id="@+id/tvCodigoComp"

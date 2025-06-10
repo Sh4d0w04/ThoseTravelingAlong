@@ -1,4 +1,4 @@
-package com.example.thoseTravelingAlong.android.bbdd;
+package com.example.thoseTravelingAlong.android.modelo;
 
 import java.util.Date;
 import java.util.List;

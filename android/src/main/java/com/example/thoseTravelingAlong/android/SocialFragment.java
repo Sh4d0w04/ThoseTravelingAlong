@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.tv.TvView;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -14,15 +15,15 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.badlogic.gdx.scenes.scene2d.ui.Value;
 import com.example.thoseTravelingAlong.R;
 import com.example.thoseTravelingAlong.android.adaptador.AdaptadorComp;
-import com.example.thoseTravelingAlong.android.bbdd.CompeticionFirebase;
+import com.example.thoseTravelingAlong.android.modelo.CompeticionFirebase;
 import com.example.thoseTravelingAlong.android.modelo.Jugador;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.database.DataSnapshot;
@@ -30,6 +31,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -93,6 +96,18 @@ public class SocialFragment extends Fragment {
         tvNombreUsuario.setText(infoUser.getString("nombre_de_usuario", "Nombre"));
         tvNumMonedas.setText(Integer.toString(infoUser.getInt("numero_de_monedas", 0)));
 
+        lvListaComp.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                TextView tvNombreUser = view.findViewById(R.id.tvNomUsuario);
+                if (tvNombreUser != null){
+                    String nombreUser = tvNombreUser.getText().toString();
+                    infoUser.edit().putString("nombre_comp",nombreUser).apply();
+                    getParentFragmentManager().beginTransaction().setCustomAnimations(R.anim.slide_in_derecha,R.anim.slide_out_izquierda).replace(R.id.fragmentContainerView,new CompeticionFragment()).commit();
+                }
+            }
+        });
+
         btnIniciarCom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -108,7 +123,6 @@ public class SocialFragment extends Fragment {
         DatabaseReference nuevaDatabaseReference = databaseReference.push();
         CompeticionFirebase competicionFirebase = new CompeticionFirebase(listaCorreos, generarDate7Dias(new Date()));
         nuevaDatabaseReference.setValue(competicionFirebase);
-        Log.e("Prueba Firebase", "si");
     }
 
     private void leerCompeticionFireBase() {

@@ -57,7 +57,7 @@ public class ControladorActivity extends AppCompatActivity implements AndroidFra
                     selectedFragment = new StepFragment();
                 }
 
-                if(selectedFragment != null && nuevoIndice != indiceActual){
+                if((selectedFragment != null && nuevoIndice != indiceActual) || nuevoIndice == 0){
                     boolean toRigth = nuevoIndice > indiceActual;
                     cargarFragment(selectedFragment, toRigth);
                     indiceActual = nuevoIndice;
