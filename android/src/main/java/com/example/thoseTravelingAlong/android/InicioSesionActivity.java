@@ -22,7 +22,10 @@ import androidx.core.view.WindowInsetsCompat;
 import com.example.thoseTravelingAlong.R;
 import com.example.thoseTravelingAlong.android.bbdd.Modelo;
 import com.example.thoseTravelingAlong.android.modelo.Jugador;
+import com.example.thoseTravelingAlong.android.modelo.RegistrosFirebase;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -154,13 +157,14 @@ public class InicioSesionActivity extends AppCompatActivity {
                     case 6:
                         Toast.makeText(InicioSesionActivity.this, "Error en la BBDD", Toast.LENGTH_SHORT).show();
                 }
-
+                borrarDatosIniciarSesion();
             }
         });
 
         btnCancelarDialog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                borrarDatosIniciarSesion();
                 dialogoInicioSesion.dismiss();
                 Toast.makeText(InicioSesionActivity.this, "Cancelado", Toast.LENGTH_SHORT).show();
             }
@@ -169,8 +173,7 @@ public class InicioSesionActivity extends AppCompatActivity {
         tvCrearCuenta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                edTxtNombreUsuarioIni.getEditText().setText("");
-                edTxtContrasenaIni.getEditText().setText("");
+                borrarDatosIniciarSesion();
                 dialogoInicioSesion.dismiss();
                 dialogoCrearCuenta.show();
             }
@@ -259,6 +262,7 @@ public class InicioSesionActivity extends AppCompatActivity {
                         Toast.makeText(InicioSesionActivity.this, "El correo electrónico no es valido", Toast.LENGTH_SHORT).show();
                         break;
                 }
+                borrarDatosCrearCuenta();
             }
         });
 
@@ -266,17 +270,14 @@ public class InicioSesionActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 dialogoCrearCuenta.dismiss();
+                borrarDatosCrearCuenta();
                 Toast.makeText(InicioSesionActivity.this, "Cancelado", Toast.LENGTH_SHORT).show();
             }
         });
         tvIniciarSesion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                edTxtNombreUsuarioCrear.getEditText().setText("");
-                edTxtContrasenaCrear.getEditText().setText("");
-                edTxtConfirmarContrasenaCrear.getEditText().setText("");
-                edTxtCorreo.getEditText().setText("");
-                edTxtFechaNaciminetoCrear.getEditText().setText("");
+                borrarDatosCrearCuenta();
                 dialogoCrearCuenta.dismiss();
                 dialogoInicioSesion.show();
             }
@@ -385,5 +386,18 @@ public class InicioSesionActivity extends AppCompatActivity {
 
         date = cal.getTime();
         return date;
+    }
+
+    private void borrarDatosCrearCuenta(){
+        edTxtNombreUsuarioCrear.getEditText().setText("");
+        edTxtContrasenaCrear.getEditText().setText("");
+        edTxtConfirmarContrasenaCrear.getEditText().setText("");
+        edTxtCorreo.getEditText().setText("");
+        edTxtFechaNaciminetoCrear.getEditText().setText("");
+    }
+
+    private void borrarDatosIniciarSesion(){
+        edTxtNombreUsuarioIni.getEditText().setText("");
+        edTxtContrasenaIni.getEditText().setText("");
     }
 }

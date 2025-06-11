@@ -72,16 +72,15 @@ public class BBDDWorker extends Worker {
         sharedPreferences.edit().putInt("ultimos_pasos_guardados", 0).apply();
         sharedPreferences.edit().putInt("num_peces_capturados", 0).apply();
 
-        guardarRegistroFireBase(usuario,ultimosPasosDados,monedasGanadas, fechaActual, getApplicationContext());
+        guardarRegistroFireBase(usuario,ultimosPasosDados,monedasGanadas);
         crearNotificacion(ultimosPasosDados, numPecesCapturados);
 
         return Result.success();
     }
 
-    private void guardarRegistroFireBase(String correoUser, int pasosDados, int numMonedas, Date fecha, Context context) {
-        Modelo modelo = new Modelo();
+    private void guardarRegistroFireBase(String correoUser, int pasosDados, int numMonedas) {
         DatabaseReference nuevaDatabaseReference = databaseReference.push();
-        RegistrosFirebase registrosFirebase = new RegistrosFirebase(correoUser, pasosDados, numMonedas);
+        RegistrosFirebase registrosFirebase = new RegistrosFirebase(correoUser, numMonedas,pasosDados);
         nuevaDatabaseReference.setValue(registrosFirebase);
 
     }

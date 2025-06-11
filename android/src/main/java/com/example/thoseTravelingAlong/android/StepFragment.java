@@ -203,18 +203,21 @@ public class StepFragment extends Fragment implements SensorEventListener {
         String correoUser = infoUsuario.getString("Nom_User","");
         ArrayList<Date> fechas = generarDate7Dias(new Date());
         Modelo modelo = new Modelo();
-        ArrayList<BarEntry> entriesLineChart = new ArrayList<>();
+        ArrayList<BarEntry> entriesBarChart = new ArrayList<>();
         Object[] infoJugador = new Object[0];
         int numeroDeEntrada = 0;
         for(int i = 6; i >= 0; i--){
             infoJugador = modelo.cargarInformacionJugador(getContext(),correoUser,fechas.get(i));
             int numeroPasos = (int) infoJugador[0];
             if(numeroPasos != -1){
-                entriesLineChart.add(new BarEntry(numeroDeEntrada,numeroPasos));
+                entriesBarChart.add(new BarEntry(numeroDeEntrada,numeroPasos));
+                numeroDeEntrada ++;
+            }else{
+                entriesBarChart.add(new BarEntry(numeroDeEntrada,0));
                 numeroDeEntrada ++;
             }
         }
-        BarDataSet barDataSet = new BarDataSet(entriesLineChart, "Pasos andados esta semana");
+        BarDataSet barDataSet = new BarDataSet(entriesBarChart, "Pasos andados esta semana");
         barDataSet.setColors(ColorTemplate.VORDIPLOM_COLORS);
         barDataSet.setValueTextColor(Color.BLACK);
         barDataSet.setValueTextSize(10f);
@@ -237,6 +240,9 @@ public class StepFragment extends Fragment implements SensorEventListener {
             int numeroPasos = (int) infoJugador[0];
             if(numeroPasos != -1){
                 entriesLineChart.add(new Entry(numeroDeEntrada,numeroPasos));
+                numeroDeEntrada ++;
+            }else{
+                entriesLineChart.add(new Entry(numeroDeEntrada,0));
                 numeroDeEntrada ++;
             }
         }

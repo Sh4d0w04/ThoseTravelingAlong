@@ -111,17 +111,11 @@ public class CompeticionFragment extends Fragment {
                         if (registroFirebase != null) {
                             registrosFirebase.add(registroFirebase);
                         }
-                        int numeroEntrada = 0;
-                        for (RegistrosFirebase rf : registrosFirebase) {
-                            String correoCom = infoUser.getString("nombre_comp", "Nombre");
-                            if (correoCom.equals(rf.getCorreo())) {
-                                numeroMonedasCom += rf.getNumMonedas();
-                                cargarInfoBarChart(rf, numeroEntrada);
-                                cargarInfoLineChart(rf, numeroEntrada);
-                            }
-                        }
-                        infoUser.edit().putInt("numero_de_monedas_comp", numeroMonedasCom).apply();
                     }
+                    cargarInfoBarChart(registrosFirebase);
+                    cargarInfoLineChart(registrosFirebase);
+                    infoUser.edit().putInt("numero_de_monedas_comp", numeroMonedasCom).apply();
+                    tvNumMonedas.setText(Integer.toString(numeroMonedasCom));
                 } else {
                     Log.e("FireBase", "no hay tablas");
                 }
@@ -136,12 +130,19 @@ public class CompeticionFragment extends Fragment {
 
     }
 
-    private void cargarInfoBarChart(RegistrosFirebase registrosFirebase, int numeroDeEntrada) {
-        ArrayList<BarEntry> entriesLineChart = new ArrayList<>();
-
-        int numeroPasos = registrosFirebase.getPasosDia();
-        entriesLineChart.add(new BarEntry(numeroDeEntrada, numeroPasos));
-        BarDataSet barDataSet = new BarDataSet(entriesLineChart, "Pasos andados esta semana");
+    private void cargarInfoBarChart(List<RegistrosFirebase> registrosFirebase) {
+        ArrayList<BarEntry> entriesBarChart = new ArrayList<>();
+        int numeroDeEntrada = 0;
+        for (RegistrosFirebase rf : registrosFirebase) {
+            String correoCom = infoUser.getString("nombre_comp", "Nombre");
+            if (correoCom.equals(rf.getCorreo())) {
+                int numeroPasos = rf.getPasosDia();
+                numeroMonedasCom = rf.getNumMonedas();
+                entriesBarChart.add(new BarEntry(numeroDeEntrada, numeroPasos));
+                numeroDeEntrada++;
+            }
+        }
+        BarDataSet barDataSet = new BarDataSet(entriesBarChart, "Pasos andados esta semana");
         barDataSet.setColors(ColorTemplate.VORDIPLOM_COLORS);
         barDataSet.setValueTextColor(Color.BLACK);
         barDataSet.setValueTextSize(10f);
@@ -152,10 +153,19 @@ public class CompeticionFragment extends Fragment {
         barChart.invalidate();
     }
 
-    private void cargarInfoLineChart(RegistrosFirebase registrosFirebase,int numeroDeEntrada) {
+    private void cargarInfoLineChart(List<RegistrosFirebase> registrosFirebase) {
+        int numeroDeEntrada = 0;
         List<Entry> entriesLineChart = new ArrayList<>();
-        int numeroPasos = registrosFirebase.getPasosDia();
-        entriesLineChart.add(new Entry(numeroDeEntrada, numeroPasos));
+        for (RegistrosFirebase rf : registrosFirebase) {
+            String correoCom = infoUser.getString("nombre_comp", "Nombre");
+            if (correoCom.equals(rf.getCorreo())) {
+                int numeroPasos = rf.getPasosDia();
+                numeroMonedasCom = rf.getNumMonedas();
+                entriesLineChart.add(new Entry(numeroDeEntrada, numeroPasos));
+                numeroDeEntrada++;
+            }
+        }
+
 
         LineDataSet lineDataSet = new LineDataSet(entriesLineChart, "Pasos andados esta semana");
         lineDataSet.setColors(ColorTemplate.LIBERTY_COLORS);
